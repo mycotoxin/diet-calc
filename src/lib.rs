@@ -20,7 +20,7 @@ mod tests {
         assert_eq!(result, Ok(15.0));
     }
     #[test]
-    fn shall_no_tcalculate_bmi_when_height_zero() {
+    fn shall_not_calculate_bmi_when_height_zero() {
         let result = bmi(Mass::new::<kilogram>(60.0), Length::new::<meter>(0.00));
         assert!(result.is_err());
         assert_eq!(result.unwrap_err(), "Height must be greater than zero.");

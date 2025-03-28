@@ -1,7 +1,19 @@
 [package]
 name = "diet-calc"
+description = "Fundamental algorithms for dietetics computing in Rust"
 version = "0.1.0"
 edition = "2024"
+authors = ["Michał Gadziński <michal.gadzinski@gmail.com>"]
+exclude = ["literature/*", "tests/*", ".gitignore"]
+keywords = ["dietetics", "diet", "bmi", "health"]
+categories = ["science"]
+readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/mycotoxin/diet-calc"
+repository = "https://github.com/mycotoxin/diet-calc"
+documentation = "https://github.com/mycotoxin/diet-calc"
+
+
 
 [dependencies]
 uom = "0.36.0"

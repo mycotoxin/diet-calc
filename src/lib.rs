@@ -7,5 +7,9 @@ pub fn bmi(weight: Mass, height: Length) -> Result<f64, &'static str> {
     if height <= 0.0 {
         return Err("Height must be greater than zero.");
     }
-    Ok(weight.get::<kilogram>() / (height * height))
+    let weight = weight.get::<kilogram>();
+    if weight <= 0.0 {
+        return Err("Weight must be greater than zero.");
+    }
+    Ok(weight / (height * height))
 }

@@ -15,4 +15,10 @@ mod tests {
         assert!(result.is_err());
         assert_eq!(result.unwrap_err(), "Height must be greater than zero.");
     }
+    #[test]
+    fn shall_not_calculate_bmi_when_mass_zero() {
+        let result = diet_calc::bmi(Mass::new::<kilogram>(0.0), Length::new::<meter>(2.00));
+        assert!(result.is_err());
+        assert_eq!(result.unwrap_err(), "Weight must be greater than zero.");
+    }
 }

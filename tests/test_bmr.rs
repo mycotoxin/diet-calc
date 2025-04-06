@@ -30,7 +30,6 @@ mod tests {
             const_age(),
         );
 
-        assert!(!result.is_err());
         let expected = 1695.0;
         assert_approx_eq!(
             f64,
@@ -50,7 +49,6 @@ mod tests {
             const_age(),
         );
 
-        assert!(result.is_ok());
         let expected = 1507.133;
         assert_approx_eq!(
             f64,
@@ -69,9 +67,7 @@ mod tests {
             const_height(),
             const_age(),
         );
-        assert!(result.is_ok());
         let expected = 1648.5;
-
         assert_approx_eq!(
             f64,
             result.unwrap().get::<kilocalorie>(),
@@ -89,7 +85,6 @@ mod tests {
             const_height(),
             const_age(),
         );
-        assert!(result.is_ok());
         let expected = 1482.0;
         assert_approx_eq!(
             f64,
@@ -110,7 +105,6 @@ mod tests {
             const_height(),
             const_age(),
         );
-        assert!(result.is_err());
         assert_eq!(result.unwrap_err(), diet_calc::ERR_MASS);
     }
 
@@ -125,7 +119,6 @@ mod tests {
             height,
             const_age(),
         );
-        assert!(result.is_err());
         assert_eq!(result.unwrap_err(), diet_calc::ERR_HEIGHT);
     }
 
@@ -140,7 +133,6 @@ mod tests {
             const_height(),
             age,
         );
-        assert!(result.is_err());
         assert_eq!(result.unwrap_err(), diet_calc::ERR_AGE);
     }
 
@@ -155,7 +147,6 @@ mod tests {
             const_height(),
             const_age(),
         );
-        assert!(result.is_err());
         assert_eq!(result.unwrap_err(), diet_calc::ERR_MASS);
     }
 
@@ -170,7 +161,6 @@ mod tests {
             height,
             const_age(),
         );
-        assert!(result.is_err());
         assert_eq!(result.unwrap_err(), diet_calc::ERR_HEIGHT);
     }
 
@@ -185,7 +175,6 @@ mod tests {
             const_height(),
             age,
         );
-        assert!(result.is_err());
         assert_eq!(result.unwrap_err(), diet_calc::ERR_AGE);
     }
 }

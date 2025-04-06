@@ -1,10 +1,9 @@
-use uom::si::f64::{Length, Mass, Time, Energy};
+use uom::si::energy::kilocalorie;
+use uom::si::f64::{Energy, Length, Mass, Time};
 use uom::si::length::centimeter;
 use uom::si::length::meter;
 use uom::si::mass::kilogram;
 use uom::si::time::year;
-use uom::si::energy::kilocalorie;
-
 
 pub const ERR_HEIGHT: &str = "Height must be greater than zero.";
 pub const ERR_MASS: &str = "Weight must be greater than zero.";
@@ -43,8 +42,12 @@ fn bmr_harris_benedict(
     let age_years = validate_positive(age.get::<year>(), ERR_AGE)?;
 
     let bmr_result = match gender {
-        Gender::Male => Energy::new::<kilocalorie>(88.362 + (13.397 * mass_kg) + (4.799 * height_cm) - (5.677 * age_years)),
-        Gender::Female => Energy::new::<kilocalorie>(447.593 + (9.247 * mass_kg) + (3.098 * height_cm) - (4.330 * age_years)),
+        Gender::Male => Energy::new::<kilocalorie>(
+            88.362 + (13.397 * mass_kg) + (4.799 * height_cm) - (5.677 * age_years),
+        ),
+        Gender::Female => Energy::new::<kilocalorie>(
+            447.593 + (9.247 * mass_kg) + (3.098 * height_cm) - (4.330 * age_years),
+        ),
     };
 
     Ok(bmr_result)
@@ -61,9 +64,12 @@ fn bmr_mifflin_st_jeor(
     let age_years = validate_positive(age.get::<year>(), ERR_AGE)?;
 
     let bmr_result = match gender {
-
-            Gender::Male => Energy::new::<kilocalorie>((10.0 * mass_kg) + (6.25 * height_cm) - (5.0 * age_years) + 5.0),
-        Gender::Female => Energy::new::<kilocalorie>((10.0 * mass_kg) + (6.25 * height_cm) - (5.0 * age_years) - 161.0),
+        Gender::Male => Energy::new::<kilocalorie>(
+            (10.0 * mass_kg) + (6.25 * height_cm) - (5.0 * age_years) + 5.0,
+        ),
+        Gender::Female => Energy::new::<kilocalorie>(
+            (10.0 * mass_kg) + (6.25 * height_cm) - (5.0 * age_years) - 161.0,
+        ),
     };
 
     Ok(bmr_result)

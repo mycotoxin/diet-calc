@@ -1,9 +1,12 @@
+pub mod utils;
+
 use uom::si::energy::kilocalorie;
 use uom::si::f64::{Energy, Length, Mass, Time};
 use uom::si::length::centimeter;
 use uom::si::length::meter;
 use uom::si::mass::kilogram;
 use uom::si::time::year;
+use utils::validators::validate_positive;
 
 pub const ERR_HEIGHT: &str = "Height must be greater than zero.";
 pub const ERR_MASS: &str = "Weight must be greater than zero.";
@@ -11,13 +14,6 @@ pub const ERR_AGE: &str = "Age must be greater than zero.";
 pub enum Gender {
     Male,
     Female,
-}
-
-fn validate_positive(value: f64, error_message: &'static str) -> Result<f64, &'static str> {
-    if value <= 0.0 {
-        return Err(error_message);
-    }
-    Ok(value)
 }
 
 pub fn bmi(weight: Mass, height: Length) -> Result<f64, &'static str> {

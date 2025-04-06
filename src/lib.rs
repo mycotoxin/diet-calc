@@ -62,7 +62,7 @@ fn bmr_mifflin_st_jeor(
 
     let bmr_result = match gender {
 
-        Gender::Male => Energy::new::<kilocalorie>((10.0 * mass_kg) + (6.25 * height_cm) - (5.0 * age_years) + 5.0),
+            Gender::Male => Energy::new::<kilocalorie>((10.0 * mass_kg) + (6.25 * height_cm) - (5.0 * age_years) + 5.0),
         Gender::Female => Energy::new::<kilocalorie>((10.0 * mass_kg) + (6.25 * height_cm) - (5.0 * age_years) - 161.0),
     };
 

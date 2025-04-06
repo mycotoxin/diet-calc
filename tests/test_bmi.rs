@@ -19,6 +19,6 @@ mod tests {
     fn shall_not_calculate_bmi_when_mass_zero() {
         let result = diet_calc::bmi(Mass::new::<kilogram>(0.0), Length::new::<meter>(2.00));
         assert!(result.is_err());
-        assert_eq!(result.unwrap_err(), diet_calc::ERR_WEIGHT);
+        assert_eq!(result.unwrap_err(), diet_calc::ERR_MASS);
     }
 }

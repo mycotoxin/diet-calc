@@ -8,26 +8,23 @@ mod tests {
     use uom::si::mass::kilogram;
     use uom::si::time::year;
 
-    fn const_mass() -> Mass {
-        Mass::new::<kilogram>(70.0)
-    }
-
-    fn const_height() -> Length {
-        Length::new::<centimeter>(175.0)
-    }
-
-    fn const_age() -> Time {
-        Time::new::<year>(30.0)
+    fn default_test_input() -> (Mass, Length, Time) {
+        (
+            Mass::new::<kilogram>(70.0),
+            Length::new::<centimeter>(175.0),
+            Time::new::<year>(30.0),
+        )
     }
 
     #[test]
     fn test_bmr_harris_benedict_male() {
+        let (mass, height, age) = default_test_input();
         let result = diet_calc::bmr(
             BmrMethod::HarrisBenedict,
             diet_calc::Gender::Male,
-            const_mass(),
-            const_height(),
-            const_age(),
+            mass,
+            height,
+            age,
         );
 
         assert!(!result.is_err());
@@ -42,12 +39,13 @@ mod tests {
 
     #[test]
     fn test_bmr_harris_benedict_female() {
+        let (mass, height, age) = default_test_input();
         let result = diet_calc::bmr(
             BmrMethod::HarrisBenedict,
             diet_calc::Gender::Female,
-            const_mass(),
-            const_height(),
-            const_age(),
+            mass,
+            height,
+            age,
         );
 
         assert!(result.is_ok());
@@ -62,12 +60,13 @@ mod tests {
 
     #[test]
     fn test_bmr_mifflin_st_jeor_male() {
+        let (mass, height, age) = default_test_input();
         let result = diet_calc::bmr(
             BmrMethod::MifflinStJeor,
             diet_calc::Gender::Male,
-            const_mass(),
-            const_height(),
-            const_age(),
+            mass,
+            height,
+            age,
         );
         assert!(result.is_ok());
         let expected = 1648.5;
@@ -82,12 +81,13 @@ mod tests {
 
     #[test]
     fn test_bmr_mifflin_st_jeor_female() {
+        let (mass, height, age) = default_test_input();
         let result = diet_calc::bmr(
             BmrMethod::MifflinStJeor,
             diet_calc::Gender::Female,
-            const_mass(),
-            const_height(),
-            const_age(),
+            mass,
+            height,
+            age,
         );
         assert!(result.is_ok());
         let expected = 1482.0;
@@ -101,14 +101,15 @@ mod tests {
 
     #[test]
     fn test_invalid_mass() {
+        let (_, height, age) = default_test_input();
         let mass = Mass::new::<kilogram>(0.0);
 
         let result = diet_calc::bmr(
             BmrMethod::HarrisBenedict,
             diet_calc::Gender::Male,
             mass,
-            const_height(),
-            const_age(),
+            height,
+            age,
         );
         assert!(result.is_err());
         assert_eq!(result.unwrap_err(), diet_calc::ERR_MASS);
@@ -116,14 +117,15 @@ mod tests {
 
     #[test]
     fn test_invalid_height() {
+        let (mass, _, age) = default_test_input();
         let height = Length::new::<centimeter>(0.0);
 
         let result = diet_calc::bmr(
             BmrMethod::MifflinStJeor,
             diet_calc::Gender::Female,
-            const_mass(),
+            mass,
             height,
-            const_age(),
+            age,
         );
         assert!(result.is_err());
         assert_eq!(result.unwrap_err(), diet_calc::ERR_HEIGHT);
@@ -131,13 +133,14 @@ mod tests {
 
     #[test]
     fn test_invalid_age() {
+        let (mass, height, _) = default_test_input();
         let age = Time::new::<year>(0.0);
 
         let result = diet_calc::bmr(
             BmrMethod::MifflinStJeor,
             diet_calc::Gender::Female,
-            const_mass(),
-            const_height(),
+            mass,
+            height,
             age,
         );
         assert!(result.is_err());
@@ -146,14 +149,15 @@ mod tests {
 
     #[test]
     fn test_invalid_mass_mifflin_st_jeor() {
+        let (_, height, age) = default_test_input();
         let mass = Mass::new::<kilogram>(-10.0);
 
         let result = diet_calc::bmr(
             BmrMethod::HarrisBenedict,
             diet_calc::Gender::Male,
             mass,
-            const_height(),
-            const_age(),
+            height,
+            age,
         );
         assert!(result.is_err());
         assert_eq!(result.unwrap_err(), diet_calc::ERR_MASS);
@@ -161,14 +165,15 @@ mod tests {
 
     #[test]
     fn test_invalid_height_mifflin_st_jeor() {
+        let (mass, _, age) = default_test_input();
         let height = Length::new::<centimeter>(0.0);
 
         let result = diet_calc::bmr(
             BmrMethod::HarrisBenedict,
             diet_calc::Gender::Female,
-            const_mass(),
+            mass,
             height,
-            const_age(),
+            age,
         );
         assert!(result.is_err());
         assert_eq!(result.unwrap_err(), diet_calc::ERR_HEIGHT);
@@ -176,13 +181,14 @@ mod tests {
 
     #[test]
     fn test_invalid_age_mifflin_st_jeor() {
+        let (mass, height, _) = default_test_input();
         let age = Time::new::<year>(-5.0);
 
         let result = diet_calc::bmr(
             BmrMethod::HarrisBenedict,
             diet_calc::Gender::Female,
-            const_mass(),
-            const_height(),
+            mass,
+            height,
             age,
         );
         assert!(result.is_err());

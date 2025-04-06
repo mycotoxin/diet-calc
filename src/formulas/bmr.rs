@@ -1,7 +1,7 @@
 use crate::formulas::constants::{ERR_AGE, ERR_HEIGHT, ERR_MASS, Gender};
 use crate::utils::validators::is_positive;
 use uom::si::energy::kilocalorie;
-use uom::si::f64::{Energy, Length, Mass, Time};
+use uom::si::f32::{Energy, Length, Mass, Time};
 use uom::si::length::centimeter;
 use uom::si::mass::kilogram;
 use uom::si::time::year;
@@ -93,7 +93,7 @@ mod tests {
 
     use float_cmp::assert_approx_eq;
     use uom::si::energy::kilocalorie;
-    use uom::si::f64::{Length, Mass, Time};
+    use uom::si::f32::{Length, Mass, Time};
     use uom::si::length::centimeter;
     use uom::si::mass::kilogram;
     use uom::si::time::year;
@@ -122,7 +122,7 @@ mod tests {
 
         let expected = 1695.0;
         assert_approx_eq!(
-            f64,
+            f32,
             result.unwrap().get::<kilocalorie>(),
             expected,
             epsilon = 1.0
@@ -141,7 +141,7 @@ mod tests {
 
         let expected = 1507.133;
         assert_approx_eq!(
-            f64,
+            f32,
             result.unwrap().get::<kilocalorie>(),
             expected,
             epsilon = 1.0
@@ -159,7 +159,7 @@ mod tests {
         );
         let expected = 1648.5;
         assert_approx_eq!(
-            f64,
+            f32,
             result.unwrap().get::<kilocalorie>(),
             expected,
             epsilon = 1.0
@@ -177,7 +177,7 @@ mod tests {
         );
         let expected = 1482.0;
         assert_approx_eq!(
-            f64,
+            f32,
             result.unwrap().get::<kilocalorie>(),
             expected,
             epsilon = 1.0

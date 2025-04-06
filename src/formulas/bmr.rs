@@ -1,5 +1,5 @@
 use crate::formulas::constants::{ERR_AGE, ERR_HEIGHT, ERR_MASS, Gender};
-use crate::utils::validators::validate_positive;
+use crate::utils::validators::is_positive;
 use uom::si::energy::kilocalorie;
 use uom::si::f64::{Energy, Length, Mass, Time};
 use uom::si::length::centimeter;
@@ -16,16 +16,26 @@ fn bmr_harris_benedict(
     height: Length,
     age: Time,
 ) -> Result<Energy, &'static str> {
-    let mass_kg = validate_positive(mass.get::<kilogram>(), ERR_MASS)?;
-    let height_cm = validate_positive(height.get::<centimeter>(), ERR_HEIGHT)?;
-    let age_years = validate_positive(age.get::<year>(), ERR_AGE)?;
+    let mass_value = mass.get::<kilogram>();
+    let height_value = height.get::<centimeter>();
+    let age_value = age.get::<year>();
+
+    if !is_positive(mass_value) {
+        return Err(ERR_MASS);
+    }
+    if !is_positive(height_value) {
+        return Err(ERR_HEIGHT);
+    }
+    if !is_positive(age_value) {
+        return Err(ERR_AGE);
+    }
 
     let bmr_result = match gender {
         Gender::Male => Energy::new::<kilocalorie>(
-            88.362 + (13.397 * mass_kg) + (4.799 * height_cm) - (5.677 * age_years),
+            88.362 + (13.397 * mass_value) + (4.799 * height_value) - (5.677 * age_value),
         ),
         Gender::Female => Energy::new::<kilocalorie>(
-            447.593 + (9.247 * mass_kg) + (3.098 * height_cm) - (4.330 * age_years),
+            447.593 + (9.247 * mass_value) + (3.098 * height_value) - (4.330 * age_value),
         ),
     };
 
@@ -38,16 +48,26 @@ fn bmr_mifflin_st_jeor(
     height: Length,
     age: Time,
 ) -> Result<Energy, &'static str> {
-    let mass_kg = validate_positive(mass.get::<kilogram>(), ERR_MASS)?;
-    let height_cm = validate_positive(height.get::<centimeter>(), ERR_HEIGHT)?;
-    let age_years = validate_positive(age.get::<year>(), ERR_AGE)?;
+    let mass_value = mass.get::<kilogram>();
+    let height_value = height.get::<centimeter>();
+    let age_value = age.get::<year>();
+
+    if !is_positive(mass_value) {
+        return Err(ERR_MASS);
+    }
+    if !is_positive(height_value) {
+        return Err(ERR_HEIGHT);
+    }
+    if !is_positive(age_value) {
+        return Err(ERR_AGE);
+    }
 
     let bmr_result = match gender {
         Gender::Male => Energy::new::<kilocalorie>(
-            (10.0 * mass_kg) + (6.25 * height_cm) - (5.0 * age_years) + 5.0,
+            (10.0 * mass_value) + (6.25 * height_value) - (5.0 * age_value) + 5.0,
         ),
         Gender::Female => Energy::new::<kilocalorie>(
-            (10.0 * mass_kg) + (6.25 * height_cm) - (5.0 * age_years) - 161.0,
+            (10.0 * mass_value) + (6.25 * height_value) - (5.0 * age_value) - 161.0,
         ),
     };
 

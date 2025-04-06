@@ -1,14 +1,20 @@
 use crate::formulas::constants::{ERR_HEIGHT, ERR_MASS};
-use crate::utils::validators::validate_positive;
+use crate::utils::validators::is_positive;
 use uom::si::f64::{Length, Mass};
 use uom::si::length::meter;
 use uom::si::mass::kilogram;
 
-pub fn bmi(weight: Mass, height: Length) -> Result<f64, &'static str> {
-    let height_meters = validate_positive(height.get::<meter>(), ERR_HEIGHT)?;
-    let weight_kg = validate_positive(weight.get::<kilogram>(), ERR_MASS)?;
+pub fn bmi(mass: Mass, height: Length) -> Result<f64, &'static str> {
+    let mass = mass.get::<kilogram>();
+    let height = height.get::<meter>();
+    if !is_positive(mass) {
+        return Err(ERR_MASS);
+    }
+    if !is_positive(height) {
+        return Err(ERR_HEIGHT);
+    }
 
-    Ok(weight_kg / (height_meters * height_meters))
+    Ok(mass / (height * height))
 }
 
 #[cfg(test)]

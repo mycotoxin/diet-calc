@@ -1,5 +1,6 @@
 use crate::formulas::bmr::{BmrMethod, bmr};
 use crate::formulas::constants::Gender;
+use crate::utils::validators::is_positive;
 use uom::si::f32::{Energy, Length, Mass, Time};
 
 const ERR_ACTIVITY: &'static str = "Activity level must be positive.";
@@ -12,7 +13,7 @@ pub fn tdee(
     age: Time,
     activity_level: f32,
 ) -> Result<Energy, &'static str> {
-    if activity_level <= 0.0 {
+    if !is_positive(activity_level) {
         return Err(ERR_ACTIVITY);
     }
 

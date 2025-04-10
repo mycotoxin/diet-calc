@@ -1,5 +1,5 @@
 use crate::formulas::bmr::{BmrMethod, bmr};
-use crate::formulas::constants::{Gender, ERR_ACTIVITY};
+use crate::formulas::constants::{ERR_ACTIVITY, Gender};
 use crate::utils::validators::is_positive;
 use uom::si::f32::{Energy, Length, Mass, Time};
 
@@ -42,7 +42,7 @@ mod tests {
     #[test]
     fn test_tdee() {
         let result = tdee(
-            BmrMethod::HarrisBenedict,
+            BmrMethod::HarrisBenedictRozAndShizgal,
             Gender::Male,
             const_mass(),
             const_height(),
@@ -61,7 +61,7 @@ mod tests {
     #[test]
     fn test_invalid_activity_level() {
         let result = tdee(
-            BmrMethod::HarrisBenedict,
+            BmrMethod::HarrisBenedictRozAndShizgal,
             Gender::Male,
             const_mass(),
             const_height(),

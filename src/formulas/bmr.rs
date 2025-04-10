@@ -7,7 +7,7 @@ use uom::si::mass::kilogram;
 use uom::si::time::year;
 
 pub enum BmrMethod {
-    HarrisBenedict,
+    HarrisBenedictRozAndShizgal,
     MifflinStJeor,
 }
 fn bmr_harris_benedict(
@@ -82,7 +82,9 @@ pub fn bmr(
     age: Time,
 ) -> Result<Energy, &'static str> {
     match method {
-        BmrMethod::HarrisBenedict => Ok(bmr_harris_benedict(gender, mass, height, age)?),
+        BmrMethod::HarrisBenedictRozAndShizgal => {
+            Ok(bmr_harris_benedict(gender, mass, height, age)?)
+        }
         BmrMethod::MifflinStJeor => Ok(bmr_mifflin_st_jeor(gender, mass, height, age)?),
     }
 }
@@ -113,7 +115,7 @@ mod tests {
     #[test]
     fn test_bmr_harris_benedict_male() {
         let result = bmr(
-            BmrMethod::HarrisBenedict,
+            BmrMethod::HarrisBenedictRozAndShizgal,
             Gender::Male,
             const_mass(),
             const_height(),
@@ -132,7 +134,7 @@ mod tests {
     #[test]
     fn test_bmr_harris_benedict_female() {
         let result = bmr(
-            BmrMethod::HarrisBenedict,
+            BmrMethod::HarrisBenedictRozAndShizgal,
             Gender::Female,
             const_mass(),
             const_height(),
@@ -189,7 +191,7 @@ mod tests {
         let mass = Mass::new::<kilogram>(0.0);
 
         let result = bmr(
-            BmrMethod::HarrisBenedict,
+            BmrMethod::HarrisBenedictRozAndShizgal,
             Gender::Male,
             mass,
             const_height(),
@@ -231,7 +233,7 @@ mod tests {
         let mass = Mass::new::<kilogram>(-10.0);
 
         let result = bmr(
-            BmrMethod::HarrisBenedict,
+            BmrMethod::HarrisBenedictRozAndShizgal,
             Gender::Male,
             mass,
             const_height(),
@@ -245,7 +247,7 @@ mod tests {
         let height = Length::new::<centimeter>(0.0);
 
         let result = bmr(
-            BmrMethod::HarrisBenedict,
+            BmrMethod::HarrisBenedictRozAndShizgal,
             Gender::Female,
             const_mass(),
             height,
@@ -259,7 +261,7 @@ mod tests {
         let age = Time::new::<year>(-5.0);
 
         let result = bmr(
-            BmrMethod::HarrisBenedict,
+            BmrMethod::HarrisBenedictRozAndShizgal,
             Gender::Female,
             const_mass(),
             const_height(),

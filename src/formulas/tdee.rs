@@ -1,9 +1,7 @@
 use crate::formulas::bmr::{BmrMethod, bmr};
-use crate::formulas::constants::Gender;
+use crate::formulas::constants::{Gender, ERR_ACTIVITY};
 use crate::utils::validators::is_positive;
 use uom::si::f32::{Energy, Length, Mass, Time};
-
-const ERR_ACTIVITY: &'static str = "Activity level must be positive.";
 
 pub fn tdee(
     bmr_method: BmrMethod,

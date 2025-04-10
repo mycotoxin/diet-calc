@@ -3,10 +3,6 @@ use crate::utils::validators::is_positive;
 use uom::si::f32::Length;
 use uom::si::length::{centimeter, meter};
 
-/// Body Adiposity Index (BAI) — Oblicza przybliżony procent tkanki tłuszczowej.
-///
-/// # Wzór
-/// BAI = (Hip circumference [m] / Height [m]^1.5) - 18
 pub fn bai(hip: Length, height: Length) -> Result<f32, &'static str> {
     let hip_cm = hip.get::<centimeter>();
     let height_m = height.get::<meter>();

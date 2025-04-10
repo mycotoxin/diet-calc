@@ -5,16 +5,16 @@ use uom::si::length::meter;
 use uom::si::mass::kilogram;
 
 pub fn bmi(mass: Mass, height: Length) -> Result<f32, &'static str> {
-    let mass = mass.get::<kilogram>();
-    let height = height.get::<meter>();
-    if !is_positive(mass) {
+    let mass_kg = mass.get::<kilogram>();
+    let height_m = height.get::<meter>();
+    if !is_positive(mass_kg) {
         return Err(ERR_MASS);
     }
-    if !is_positive(height) {
+    if !is_positive(height_m) {
         return Err(ERR_HEIGHT);
     }
 
-    Ok(mass / (height * height))
+    Ok(mass_kg / (height_m * height_m))
 }
 
 #[cfg(test)]

@@ -16,26 +16,26 @@ fn bmr_harris_benedict(
     height: Length,
     age: Time,
 ) -> Result<Energy, &'static str> {
-    let mass_value = mass.get::<kilogram>();
-    let height_value = height.get::<centimeter>();
-    let age_value = age.get::<year>();
+    let mass_kg = mass.get::<kilogram>();
+    let height_cm = height.get::<centimeter>();
+    let age_years = age.get::<year>();
 
-    if !is_positive(mass_value) {
+    if !is_positive(mass_kg) {
         return Err(ERR_MASS);
     }
-    if !is_positive(height_value) {
+    if !is_positive(height_cm) {
         return Err(ERR_HEIGHT);
     }
-    if !is_positive(age_value) {
+    if !is_positive(age_years) {
         return Err(ERR_AGE);
     }
 
     let bmr_result = match gender {
         Gender::Male => Energy::new::<kilocalorie>(
-            88.362 + (13.397 * mass_value) + (4.799 * height_value) - (5.677 * age_value),
+            88.362 + (13.397 * mass_kg) + (4.799 * height_cm) - (5.677 * age_years),
         ),
         Gender::Female => Energy::new::<kilocalorie>(
-            447.593 + (9.247 * mass_value) + (3.098 * height_value) - (4.330 * age_value),
+            447.593 + (9.247 * mass_kg) + (3.098 * height_cm) - (4.330 * age_years),
         ),
     };
 
@@ -48,26 +48,26 @@ fn bmr_mifflin_st_jeor(
     height: Length,
     age: Time,
 ) -> Result<Energy, &'static str> {
-    let mass_value = mass.get::<kilogram>();
-    let height_value = height.get::<centimeter>();
-    let age_value = age.get::<year>();
+    let mass_kg = mass.get::<kilogram>();
+    let height_cm = height.get::<centimeter>();
+    let age_years = age.get::<year>();
 
-    if !is_positive(mass_value) {
+    if !is_positive(mass_kg) {
         return Err(ERR_MASS);
     }
-    if !is_positive(height_value) {
+    if !is_positive(height_cm) {
         return Err(ERR_HEIGHT);
     }
-    if !is_positive(age_value) {
+    if !is_positive(age_years) {
         return Err(ERR_AGE);
     }
 
     let bmr_result = match gender {
         Gender::Male => Energy::new::<kilocalorie>(
-            (10.0 * mass_value) + (6.25 * height_value) - (5.0 * age_value) + 5.0,
+            (10.0 * mass_kg) + (6.25 * height_cm) - (5.0 * age_years) + 5.0,
         ),
         Gender::Female => Energy::new::<kilocalorie>(
-            (10.0 * mass_value) + (6.25 * height_value) - (5.0 * age_value) - 161.0,
+            (10.0 * mass_kg) + (6.25 * height_cm) - (5.0 * age_years) - 161.0,
         ),
     };
 

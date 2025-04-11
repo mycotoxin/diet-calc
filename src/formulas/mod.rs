@@ -1,6 +1,11 @@
 pub mod bmi;
+pub use bmi::bmi;
 pub mod bmr;
+pub use bmr::bmr;
 pub mod body_adiposity_index;
+pub use body_adiposity_index::bai;
 pub mod constants;
 pub mod tdee;
+pub use tdee::tdee;
 pub mod waist_height_ratio;
+pub use waist_height_ratio::whtr;

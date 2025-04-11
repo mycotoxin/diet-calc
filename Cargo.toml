@@ -1,7 +1,7 @@
 [package]
 name = "diet-calc"
 description = "Fundamental algorithms for dietetics computing in Rust"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 authors = ["Michał Gadziński <michal.gadzinski@gmail.com>"]
 exclude = ["literature/*", "tests/*", ".gitignore"]

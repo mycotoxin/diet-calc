@@ -66,9 +66,20 @@ Clone, build, and run the project:
 git clone https://github.com/mycotoxin/diet-calc.git
 cd diet-calc
 cargo build --release
-./target/release/diet-calc
 ```
 
+```rust
+use diet_calc::formulas::bmi::bmi;
+use uom::si::f32::{ Length, Mass};
+use uom::si::length::centimeter;
+use uom::si::mass::kilogram;
+
+fn main() {
+    let bmi: f32 = bmi(Mass::new::<kilogram>(70.0), Length::new::<centimeter>(184.0)).unwrap();
+    println!("BMR Result is: {} ", bmi);
+}
+
+```
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

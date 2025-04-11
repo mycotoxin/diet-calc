@@ -69,7 +69,7 @@ cargo build --release
 ```
 
 ```rust
-use diet_calc::formulas::bmi::bmi;
+use diet_calc::formulas::bmi;
 use uom::si::f32::{ Length, Mass};
 use uom::si::length::centimeter;
 use uom::si::mass::kilogram;

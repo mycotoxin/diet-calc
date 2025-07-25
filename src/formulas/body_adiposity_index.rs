@@ -31,7 +31,6 @@ mod tests {
         let result = bai(hip, height);
         assert!(result.is_ok());
 
-        // wynik przybliżony około 21.1
         assert_approx_eq!(f32, result.unwrap(), 22.6, epsilon = 0.1);
     }
 
